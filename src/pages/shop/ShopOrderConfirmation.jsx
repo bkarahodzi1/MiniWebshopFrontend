@@ -9,10 +9,12 @@ export default function ShopOrderConfirmation() {
   const [order, setOrder] = useState(null)
 
   useEffect(() => {
-    const foundOrder = getOrder(id)
-    if (foundOrder) {
-      setOrder(foundOrder)
-    }
+    async function fetchOrder(){
+      const foundOrder = await getOrder(id)
+      if (foundOrder) {
+        setOrder(foundOrder)
+      }
+    }fetchOrder()
   }, [id, getOrder])
 
   if (!order) {
@@ -67,11 +69,11 @@ export default function ShopOrderConfirmation() {
                 <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                   <div className="sm:col-span-1">
                     <dt className="text-sm font-medium text-gray-500">Order Date</dt>
-                    <dd className="mt-1 text-sm text-gray-900">{new Date(order.date).toLocaleString()}</dd>
+                    <dd className="mt-1 text-sm text-gray-900">{new Date(order.created_at).toLocaleString()}</dd>
                   </div>
                   <div className="sm:col-span-1">
                     <dt className="text-sm font-medium text-gray-500">Total Amount</dt>
-                    <dd className="mt-1 text-lg font-bold text-gray-900">${order.totalPrice.toFixed(2)}</dd>
+                    <dd className="mt-1 text-lg font-bold text-gray-900">${order.total_price.toFixed(2)}</dd>
                   </div>
                   <div className="sm:col-span-2">
                     <dt className="text-sm font-medium text-gray-500">Shipping Address</dt>
@@ -90,7 +92,7 @@ export default function ShopOrderConfirmation() {
                 <h3 className="text-lg font-medium text-gray-900">Items Ordered</h3>
                 <ul role="list" className="mt-4 divide-y divide-gray-200 border-t border-b border-gray-200">
                   {order.items.map((item) => (
-                    <li key={item.productId} className="py-4 flex justify-between items-center">
+                    <li key={item.product_id} className="py-4 flex justify-between items-center">
                       <div className="flex items-center">
                         <img
                           src={item.image || "/placeholder.svg?height=50&width=50"}

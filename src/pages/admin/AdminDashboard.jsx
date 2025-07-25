@@ -1,21 +1,41 @@
-import {Link} from "react-router-dom"
+import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import AdminLayout from "../../components/admin/AdminLayout"
-import {useProducts} from "../../contexts/ProductContext"
-import {useCart} from "../../contexts/CartContext"
+import { useCart } from "../../contexts/CartContext"
 
 export default function AdminDashboard() {
-  const {products} = useProducts()
-  const {getOrders} = useCart()
-  const orders = getOrders()
+  const { getOrders } = useCart()
+  const [ordersData, setOrdersData] = useState(null)
 
-  //Calculate the statistics
-  const totalProducts = products.length
-  const totalOrders = orders.length
-  const totalRevenue = orders.reduce((sum, order) => sum + order.totalPrice, 0)
-  const lowStockProducts = products.filter((product) => product.quantity < 10).length
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const data = await getOrders()
+        setOrdersData(data)
+      } catch (error) {
+        console.error("Failed to load orders:", error)
+      }
+    }
 
-  //Get the 5 most recent orders
-  const recentOrders = [...orders].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5)
+    fetchOrders()
+  }, [])
+
+  if (!ordersData) {
+    return (
+      <AdminLayout>
+        <div className="p-6">Loading...</div>
+      </AdminLayout>
+    )
+  }
+
+  const orders = ordersData.data
+  const totalProducts = localStorage.getItem("totalItems")
+  const totalOrders = ordersData.total_items
+  const totalRevenue = orders.reduce((sum, order) => sum + order.total_price, 0)
+  const lowStockProducts = localStorage.getItem("lowStock")
+  const recentOrders = [...orders]
+    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+    .slice(0, 5)
 
   return (
     <AdminLayout>
@@ -221,16 +241,16 @@ export default function AdminDashboard() {
                     {recentOrders.length > 0 ? (
                       recentOrders.map((order) => (
                         <tr key={order.id}>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">#{order.id.slice(0, 8)}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">#{order.id}</td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="text-sm text-gray-900">{order.customer.name}</div>
                             <div className="text-sm text-gray-500">{order.customer.email}</div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {new Date(order.date).toLocaleDateString()}
+                            {new Date(order.created_at).toLocaleDateString()}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            ${order.totalPrice.toFixed(2)}
+                            ${order.total_price.toFixed(2)}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span
@@ -240,6 +260,8 @@ export default function AdminDashboard() {
                                   ? "bg-green-100 text-green-800"
                                   : order.status === "rejected"
                                     ? "bg-red-100 text-red-800"
+                                  : order.status === "accepted"
+                                    ? "bg-blue-100 text-blue-800"
                                     : "bg-yellow-100 text-yellow-800"
                               }`}
                             >

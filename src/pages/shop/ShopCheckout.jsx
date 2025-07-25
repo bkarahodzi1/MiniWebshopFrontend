@@ -10,6 +10,7 @@ export default function ShopCheckout() {
   const [customerInfo, setCustomerInfo] = useState({
     name: "",
     email: "",
+    phone: "",
     address: "",
     city: "",
     zipCode: "",
@@ -48,7 +49,7 @@ export default function ShopCheckout() {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (!validateForm()) {
       return
@@ -60,7 +61,7 @@ export default function ShopCheckout() {
       return
     }
 
-    const newOrder = createOrder(customerInfo)
+    const newOrder = await createOrder(customerInfo)
     navigate(`/order-confirmation/${newOrder.id}`)
   }
 
@@ -106,7 +107,23 @@ export default function ShopCheckout() {
                     {errors.email && <p className="mt-2 text-sm text-red-600">{errors.email}</p>}
                   </div>
                 </div>
-                <div className="sm:col-span-2">
+                <div>
+                  <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    Phone Number
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="number"
+                      name="phone"
+                      id="phone"
+                      className={`shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md ${errors.address ? "border-red-500" : ""}`}
+                      value={customerInfo.phone}
+                      onChange={handleChange}
+                    />
+                    {errors.address && <p className="mt-2 text-sm text-red-600">{errors.address}</p>}
+                  </div>
+                </div>
+                <div>
                   <label htmlFor="address" className="block text-sm font-medium text-gray-700">
                     Street Address
                   </label>

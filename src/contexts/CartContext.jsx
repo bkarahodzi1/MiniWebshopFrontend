@@ -1,4 +1,5 @@
 import {createContext, useState, useContext, useEffect} from "react"
+import {useProducts} from "./ProductContext"
 
 const CartContext = createContext()
 
@@ -7,6 +8,8 @@ export const useCart = () => useContext(CartContext)
 export const CartProvider = ({children}) => {
   const [cart, setCart] = useState([])
   const [orders, setOrders] = useState([])
+  const {updateProduct} = useProducts()
+  const {getProduct} = useProducts()
 
   useEffect(() => {
     //Load cart from localStorage
@@ -27,11 +30,6 @@ export const CartProvider = ({children}) => {
     localStorage.setItem("cart", JSON.stringify(cart))
   }, [cart])
 
-  //CONNECT ME TO THE BACKEND!!!!
-  //CONNECT ME TO THE BACKEND!!!!
-  //CONNECT ME TO THE BACKEND!!!!
-  //CONNECT ME TO THE BACKEND!!!!
-  //CONNECT ME TO THE BACKEND!!!!
   useEffect(() => {
     localStorage.setItem("orders", JSON.stringify(orders))
   }, [orders])
@@ -54,7 +52,7 @@ export const CartProvider = ({children}) => {
           productId: product.id,
           name: product.name,
           price: product.price,
-          image: product.image,
+          image: product.image_url,
           quantity,
         },
       ])
@@ -89,37 +87,90 @@ export const CartProvider = ({children}) => {
   }
 
   //Create a new order
-  const createOrder = (customerInfo) => {
+  const createOrder = async (customerInfo) => {
     const newOrder = {
-      id: Date.now().toString(),
-      items: [...cart],
+      items: cart.map(item => ({
+        product_id: item.productId,
+        price: item.price,
+        name: item.name,
+        image: item.image,
+        quantity: item.quantity
+      })),
+      total_price: getTotalPrice(),
       customer: customerInfo,
-      totalPrice: getTotalPrice(),
       status: "pending",
-      date: new Date().toISOString(),
+      created_at: new Date().toISOString(),
+    }
+
+    const res = await fetch(`http://localhost:8000/orders`,{
+      method: "POST",
+       headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newOrder),
+    })
+    const data = await res.json()
+    console.log("data:")
+    console.log(data)
+
+    data.items.forEach(async item =>{
+      const newProduct = await getProduct(item.product_id)
+      updateProduct(item.product_id, {quantity: newProduct.quantity - item.quantity})
+    })
+
+    const returnOrder = {
+      ...newOrder,
+      id: data.id
     }
 
     const updatedOrders = [...orders, newOrder]
     setOrders(updatedOrders)
     clearCart()
 
-    return newOrder
+    return returnOrder
   }
 
   //Update order status
   const updateOrderStatus = (orderId, status) => {
+    fetch(`http://localhost:8000/orders/${orderId}`,{
+      method: "PATCH",
+       headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({"status": status}),
+    })
     const updatedOrders = orders.map((order) => (order.id === orderId ? {...order, status} : order))
     setOrders(updatedOrders)
   }
 
   //Get all orders
-  const getOrders = () => {
-    return orders
+  const getOrders = async (page = 1, filters = {}) => {
+  try {
+    const params = new URLSearchParams();
+    params.append("page", page);
+
+    if (filters.customer_name)params.append("customer_name", filters.customer_name);
+    if (filters.status)       params.append("status", filters.status);
+    if (filters.sort_by)      params.append("sort_by", filters.sort_by);
+
+    const res = await fetch(`http://localhost:8000/orders?${params.toString()}`);
+    const data = await res.json();
+
+    setOrders(data.data);
+    localStorage.setItem("orders", JSON.stringify(data.data));
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    return null;
   }
+}
 
   //Get a single order by ID
-  const getOrder = (id) => {
-    return orders.find((order) => order.id === id)
+  const getOrder = async (id) => {
+    const res = await fetch(`http://localhost:8000/orders/${id}`)
+    const data = await res.json()
+    return data
   }
 
   const value = {

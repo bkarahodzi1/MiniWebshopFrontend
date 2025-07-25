@@ -38,6 +38,8 @@ export const ProductProvider = ({children}) => {
     } else {
       const data = await loadProductsFromBackend(1)
       localStorage.setItem("totalPages", data.total_pages)
+      localStorage.setItem("totalItems", data.total_items)
+      localStorage.setItem("lowStock", data.low_stock)
     }
     setLoading(false)
   }
@@ -51,9 +53,6 @@ export const ProductProvider = ({children}) => {
       ...product,
       created_at: new Date().toISOString(),
     }
-
-    console.log("proizvod")
-    console.log(newProduct)
 
     await fetch(`http://localhost:8000/products`,{
       method: "POST",

@@ -15,13 +15,16 @@ export default function OrderDetails() {
 
   //Show order details if found
   useEffect(() => {
-    const foundOrder = getOrder(id)
-    if (foundOrder) {
-      setOrder(foundOrder)
-      setSelectedStatus(foundOrder.status)
-    } else {
-      navigate("/admin/orders") //Redirect if order not found
+    const fetchData = async() => {
+      const foundOrder = await getOrder(id)
+      if (foundOrder) {
+        setOrder(foundOrder)
+        setSelectedStatus(foundOrder.status)
+      } else {
+        navigate("/admin/orders") //Redirect if order not found
+      }
     }
+    fetchData()
   }, [id, getOrder, navigate])
 
   const handleStatusChange = (e) => {
@@ -50,7 +53,7 @@ export default function OrderDetails() {
     <AdminLayout>
       <div className="px-4 py-6 sm:px-0">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-semibold text-gray-900">Order #{order.id.slice(0, 8)}</h1>
+          <h1 className="text-2xl font-semibold text-gray-900">Order #{order.id}</h1>
           <button
             onClick={() => navigate("/admin/orders")}
             className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -92,7 +95,7 @@ export default function OrderDetails() {
               </div>
               <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-500">Total Price</dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${order.totalPrice.toFixed(2)}</dd>
+                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">${order.total_price.toFixed(2)}</dd>
               </div>
               <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-500">Order Status</dt>
@@ -158,9 +161,9 @@ export default function OrderDetails() {
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                       {order.items.map((item) => {
-                        const productDetails = getProduct(item.productId)
+                        const productDetails = getProduct(item.product_id)
                         return (
-                          <tr key={item.productId}>
+                          <tr key={item.product_id}>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="flex items-center">
                                 <div className="flex-shrink-0 h-10 w-10">

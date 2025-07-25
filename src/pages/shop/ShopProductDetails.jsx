@@ -32,8 +32,11 @@ export default function ShopProductDetails() {
   //Handle adding to cart (only available quantity)
   const handleAddToCart = () => {
     if (product && quantity > 0 && quantity <= product.quantity) {
+      console.log("product")
+      console.log(product)
       addToCart(product, quantity)
       alert(`${quantity} x ${product.name} added to cart!`)
+      navigate("/products")
     } else if (product && quantity > product.quantity) {
       alert(`Only ${product.quantity} items are available in stock.`)
     } else {
