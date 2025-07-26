@@ -147,7 +147,7 @@ export default function ShopHome() {
                 <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                   <Link to={`/products/${product.id}`}>
                     <img
-                      src={product.image || "/placeholder.svg?height=300&width=300"}
+                      src={product.image_url || "/placeholder.svg?height=300&width=300"}
                       alt={product.name}
                       className="w-full h-48 object-cover"
                     />

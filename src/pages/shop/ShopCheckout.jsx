@@ -192,7 +192,7 @@ export default function ShopCheckout() {
                     <li key={item.productId} className="py-4 flex justify-between items-center">
                       <div className="flex items-center">
                         <img
-                          src={item.image || "/placeholder.svg?height=50&width=50"}
+                          src={item.image_url || "/placeholder.svg?height=50&width=50"}
                           alt={item.name}
                           className="h-10 w-10 rounded-md object-cover mr-4"
                         />

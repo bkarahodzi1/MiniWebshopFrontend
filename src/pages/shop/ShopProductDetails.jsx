@@ -59,7 +59,7 @@ export default function ShopProductDetails() {
           {/* Product Image */}
           <div className="lg:w-1/2 flex justify-center items-center">
             <img
-              src={product.image || "/placeholder.svg?height=500&width=500"}
+              src={product.image_url || "/placeholder.svg?height=500&width=500"}
               alt={product.name}
               className="w-full max-w-md h-auto object-contain rounded-lg shadow-md"
             />

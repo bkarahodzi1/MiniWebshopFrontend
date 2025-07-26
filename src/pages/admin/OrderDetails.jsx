@@ -169,7 +169,7 @@ export default function OrderDetails() {
                                 <div className="flex-shrink-0 h-10 w-10">
                                   <img
                                     className="h-10 w-10 rounded-full object-cover"
-                                    src={productDetails?.image || "/placeholder.svg"}
+                                    src={productDetails?.image_url || "/placeholder.svg"}
                                     alt={item.name}
                                   />
                                 </div>

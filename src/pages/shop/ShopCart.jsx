@@ -51,7 +51,7 @@ export default function ShopCart() {
                       <li key={item.productId} className="flex py-6">
                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                           <img
-                            src={item.image || "/placeholder.svg?height=100&width=100"}
+                            src={item.image_url || "/placeholder.svg?height=100&width=100"}
                             alt={item.name}
                             className="h-full w-full object-cover object-center"
                           />

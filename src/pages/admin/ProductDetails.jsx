@@ -30,7 +30,7 @@ export default function ProductDetails() {
           description: foundProduct.description,
           price: foundProduct.price,
           quantity: foundProduct.quantity,
-          image: foundProduct.image,
+          image: foundProduct.image_url,
         })
       } else {
         setTimeout(() => {
@@ -149,7 +149,7 @@ export default function ProductDetails() {
                 <dt className="text-sm font-medium text-gray-500">Product Image</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                   <img
-                    src={product.image || "/placeholder.svg"}
+                    src={product.image_url || "/placeholder.svg"}
                     alt={product.name}
                     className="w-32 h-32 object-cover rounded-md"
                   />
@@ -159,7 +159,7 @@ export default function ProductDetails() {
                         type="text"
                         name="image"
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                        value={formData.image}
+                        value={formData.image_url}
                         onChange={handleChange}
                       />
                     </div>
