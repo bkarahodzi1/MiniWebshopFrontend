@@ -4,6 +4,7 @@ import {useProducts} from "./ProductContext"
 const CartContext = createContext()
 
 export const useCart = () => useContext(CartContext)
+const baseUrl = import.meta.env.VITE_API_URL
 
 export const CartProvider = ({children}) => {
   const [cart, setCart] = useState([])
@@ -107,7 +108,7 @@ export const CartProvider = ({children}) => {
       created_at: new Date().toISOString(),
     }
 
-    const res = await fetch(`http://localhost:8000/orders/`,{
+    const res = await fetch(`http://${baseUrl}:8000/orders/`,{
       method: "POST",
        headers: {
         "Content-Type": "application/json",
@@ -137,7 +138,7 @@ export const CartProvider = ({children}) => {
 
   //Update order status
   const updateOrderStatus = (orderId, status) => {
-    fetch(`http://localhost:8000/orders/${orderId}`,{
+    fetch(`http://${baseUrl}:8000/orders/${orderId}`,{
       method: "PATCH",
        headers: {
         "Content-Type": "application/json",
@@ -158,7 +159,7 @@ export const CartProvider = ({children}) => {
     if (filters.status)       params.append("status", filters.status);
     if (filters.sort_by)      params.append("sort_by", filters.sort_by);
 
-    const res = await fetch(`http://localhost:8000/orders/?${params.toString()}`);
+    const res = await fetch(`http://${baseUrl}:8000/orders/?${params.toString()}`);
     const data = await res.json();
 
     setOrders(data.data);
@@ -173,7 +174,7 @@ export const CartProvider = ({children}) => {
 
   //Get a single order by ID
   const getOrder = async (id) => {
-    const res = await fetch(`http://localhost:8000/orders/${id}`)
+    const res = await fetch(`http://${baseUrl}:8000/orders/${id}`)
     const data = await res.json()
     return data
   }
