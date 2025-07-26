@@ -20,7 +20,7 @@ export const ProductProvider = ({children}) => {
       if (filters.min_quantity) params.append("min_quantity", filters.min_quantity)
       if (filters.sort_by) params.append("sort_by", filters.sort_by)
       
-      const res = await fetch(`http://${baseUrl}:8000/products/?${params.toString()}`)
+      const res = await fetch(`${baseUrl}/products/?${params.toString()}`)
       const data = await res.json()
       setProducts(data.data)
       localStorage.setItem("products", JSON.stringify(products))
@@ -55,7 +55,7 @@ export const ProductProvider = ({children}) => {
       created_at: new Date().toISOString(),
     }
 
-    await fetch(`http://${baseUrl}:8000/products`,{
+    await fetch(`${baseUrl}/products`,{
       method: "POST",
        headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ export const ProductProvider = ({children}) => {
   const updateProduct = async (id, updatedProduct) => {
     const updatedProducts = products.map((product) => (product.id === id ? { ...product, ...updatedProduct } : product))
     
-    await fetch(`http://${baseUrl}:8000/products/${id}`,{
+    await fetch(`${baseUrl}/products/${id}`,{
       method: "PATCH",
        headers: {
         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export const ProductProvider = ({children}) => {
 
   // Delete a product
   const deleteProduct = async (id) => {
-    await fetch(`http://${baseUrl}:8000/products/${id}`,{
+    await fetch(`${baseUrl}/products/${id}`,{
       method: "DELETE",
     })
     const updatedProducts = products.filter((product) => product.id !== id)
@@ -99,7 +99,7 @@ export const ProductProvider = ({children}) => {
 
   // Get a single product by ID
   const getProduct = async(id) => {
-    const res = await fetch(`http://${baseUrl}:8000/products/${id}`)
+    const res = await fetch(`${baseUrl}/products/${id}`)
     if (!res.ok) throw new Error("Product not found")
     return await res.json()
   }
