@@ -7,6 +7,7 @@ export const useCart = () => useContext(CartContext)
 
 export const CartProvider = ({children}) => {
   const [cart, setCart] = useState([])
+  const [didLoadCart, setDidLoadCart] = useState(false)
   const [orders, setOrders] = useState([])
   const {updateProduct} = useProducts()
   const {getProduct} = useProducts()
@@ -23,12 +24,16 @@ export const CartProvider = ({children}) => {
     if (storedOrders) {
       setOrders(JSON.parse(storedOrders))
     }
+    setDidLoadCart(true)
   }, [])
 
   //Update localStorage whenever cart changes
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart))
-  }, [cart])
+    if (didLoadCart) {
+      localStorage.setItem("cart", JSON.stringify(cart))
+    }
+  }, [cart, didLoadCart])
+
 
   useEffect(() => {
     localStorage.setItem("orders", JSON.stringify(orders))
@@ -102,7 +107,7 @@ export const CartProvider = ({children}) => {
       created_at: new Date().toISOString(),
     }
 
-    const res = await fetch(`http://localhost:8000/orders`,{
+    const res = await fetch(`http://localhost:8000/orders/`,{
       method: "POST",
        headers: {
         "Content-Type": "application/json",
@@ -153,7 +158,7 @@ export const CartProvider = ({children}) => {
     if (filters.status)       params.append("status", filters.status);
     if (filters.sort_by)      params.append("sort_by", filters.sort_by);
 
-    const res = await fetch(`http://localhost:8000/orders?${params.toString()}`);
+    const res = await fetch(`http://localhost:8000/orders/?${params.toString()}`);
     const data = await res.json();
 
     setOrders(data.data);

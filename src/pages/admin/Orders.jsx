@@ -107,7 +107,7 @@ export default function Orders() {
                         <button className="flex items-center" onClick={() => handleSort("name")}>
                           Customer
                           {sortField === "name" && (
-                            <span className="ml-1">{sortDirection === "asc" ? "↑" : "↓"}</span>
+                            <span className="ml-1">{sortDirection === "desc" ? "↑" : "↓"}</span>
                           )}
                         </button>
                       </th>
@@ -115,7 +115,7 @@ export default function Orders() {
                         <button className="flex items-center" onClick={() => handleSort("date")}>
                           Date
                           {sortField === "date" && (
-                            <span className="ml-1">{sortDirection === "asc" ? "↑" : "↓"}</span>
+                            <span className="ml-1">{sortDirection === "desc" ? "↑" : "↓"}</span>
                           )}
                         </button>
                       </th>

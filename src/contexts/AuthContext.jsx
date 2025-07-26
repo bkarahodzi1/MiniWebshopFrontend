@@ -23,11 +23,6 @@ export const AuthProvider = ({children}) => {
 
   //Login function
   const login = (username, password) => {
-    //CONNECT ME TO THE BACKEND!!!!
-    //CONNECT ME TO THE BACKEND!!!!
-    //CONNECT ME TO THE BACKEND!!!!
-    //CONNECT ME TO THE BACKEND!!!!
-    //CONNECT ME TO THE BACKEND!!!!
     if (username === "admin" && password === "password") {
       const user = { username, role: "admin" }
       localStorage.setItem("isAuthenticated", "true")

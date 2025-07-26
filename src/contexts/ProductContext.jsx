@@ -23,6 +23,9 @@ export const ProductProvider = ({children}) => {
       const data = await res.json()
       setProducts(data.data)
       localStorage.setItem("products", JSON.stringify(products))
+      localStorage.setItem("totalPages", data.total_pages)
+      localStorage.setItem("totalItems", data.total_items)
+      localStorage.setItem("lowStock", data.low_stock)
       return data
     } catch (error) {
       console.error("Error fetching products:", error)
@@ -36,10 +39,7 @@ export const ProductProvider = ({children}) => {
     if (storedProducts) {
       setProducts(storedProducts)
     } else {
-      const data = await loadProductsFromBackend(1)
-      localStorage.setItem("totalPages", data.total_pages)
-      localStorage.setItem("totalItems", data.total_items)
-      localStorage.setItem("lowStock", data.low_stock)
+      await loadProductsFromBackend(1)
     }
     setLoading(false)
   }
@@ -65,6 +65,7 @@ export const ProductProvider = ({children}) => {
     const updatedProducts = [...products, newProduct]
     setProducts(updatedProducts)
     localStorage.setItem("products", JSON.stringify(updatedProducts))
+    loadProductsFromBackend(1)
     return newProduct
   }
 
@@ -81,16 +82,18 @@ export const ProductProvider = ({children}) => {
     })
     setProducts(updatedProducts)
     localStorage.setItem("products", JSON.stringify(updatedProducts))
+    loadProductsFromBackend(1)
   }
 
   // Delete a product
-  const deleteProduct = (id) => {
-    fetch(`http://localhost:8000/products/${id}`,{
+  const deleteProduct = async (id) => {
+    await fetch(`http://localhost:8000/products/${id}`,{
       method: "DELETE",
     })
     const updatedProducts = products.filter((product) => product.id !== id)
     setProducts(updatedProducts)
     localStorage.setItem("products", JSON.stringify(updatedProducts))
+    loadProductsFromBackend(1)
   }
 
   // Get a single product by ID

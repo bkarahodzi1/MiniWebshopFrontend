@@ -31,6 +31,22 @@ const ProtectedRoute = ({children}) => {
   return children
 }
 
+// Store a timestamp when the page closes
+window.addEventListener('beforeunload', function() {
+    if (!sessionStorage.getItem('pageReloaded')) {
+        localStorage.setItem('shouldClearAfter', Date.now() + 10000);
+    }
+});
+
+// Check on page load if enough time has passed
+window.addEventListener('load', function() {
+    const clearTime = localStorage.getItem('shouldClearAfter');
+    if (clearTime && Date.now() > parseInt(clearTime)) {
+        localStorage.clear();
+        localStorage.removeItem('shouldClearAfter');
+    }
+});
+
 function App() {
   return (
     <Router>
