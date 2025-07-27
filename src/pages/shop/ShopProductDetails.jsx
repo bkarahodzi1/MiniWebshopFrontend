@@ -34,7 +34,7 @@ export default function ShopProductDetails() {
     if (product && quantity > 0 && quantity <= product.quantity) {
       addToCart(product, quantity)
       alert(`${quantity} x ${product.name} added to cart!`)
-      navigate("/products")
+      navigate("/cart")
     } else if (product && quantity > product.quantity) {
       alert(`Only ${product.quantity} items are available in stock.`)
     } else {

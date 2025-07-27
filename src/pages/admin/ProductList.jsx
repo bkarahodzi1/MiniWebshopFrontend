@@ -8,7 +8,7 @@ export default function ProductList() {
   const [searchTerm, setSearchTerm] = useState("")
   const [page, setCurrentPage] = useState(1)
   const [sortField, setSortField] = useState("date")
-  const [sortDirection, setSortDirection] = useState("desc")
+  const [sortDirection, setSortDirection] = useState("asc")
   const [priceFilter, setPriceFilter] = useState({min: "", max: ""})
   const [quantityFilter, setQuantityFilter] = useState({min: "", max: ""})
   const [sortOption, setSortOption] = useState("date_desc") 
@@ -37,7 +37,7 @@ export default function ProductList() {
       setSortOption(field + "_" + sortDirection)
     } else {
       setSortField(field)
-      setSortDirection("asc")
+      setSortDirection("desc")
       setSortOption(field + "_" + sortDirection)
     }
   }

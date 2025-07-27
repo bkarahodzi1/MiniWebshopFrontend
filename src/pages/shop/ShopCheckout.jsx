@@ -113,10 +113,10 @@ export default function ShopCheckout() {
                   </label>
                   <div className="mt-1">
                     <input
-                      type="number"
+                      type="tel"
                       name="phone"
                       id="phone"
-                      className={`shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md ${errors.address ? "border-red-500" : ""}`}
+                      className={`shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md ${errors.phone ? "border-red-500" : ""}`}
                       value={customerInfo.phone}
                       onChange={handleChange}
                     />
