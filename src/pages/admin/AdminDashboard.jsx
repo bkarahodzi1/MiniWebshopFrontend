@@ -10,7 +10,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const data = await getOrders()
+        const data = await getOrders(1, {"sort_by": "date_desc"})
         setOrdersData(data)
       } catch (error) {
         console.error("Failed to load orders:", error)
@@ -34,7 +34,6 @@ export default function AdminDashboard() {
   const totalRevenue = orders.reduce((sum, order) => sum + order.total_price, 0)
   const lowStockProducts = localStorage.getItem("lowStock")
   const recentOrders = [...orders]
-    .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
     .slice(0, 5)
 
   return (
