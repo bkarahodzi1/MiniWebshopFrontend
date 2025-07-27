@@ -282,6 +282,9 @@ export default function ProductList() {
                         </td>
                       </tr>
                     )}
+                  </tbody>
+                </table>
+              </div>
                     {products.length > 0 ? (
                       <div className="flex justify-between mt-4 space-x-4">
                       <button
@@ -299,9 +302,6 @@ export default function ProductList() {
                         Next Page →
                       </button>
                     </div>):(<div></div>)}
-                  </tbody>
-                </table>
-              </div>
             </div>
           </div>
         </div>
