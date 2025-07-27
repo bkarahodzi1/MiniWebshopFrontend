@@ -15,7 +15,7 @@ export default function ProductDetails() {
     description: "",
     price: "",
     quantity: "",
-    image: "",
+    image_url: "",
   })
   const [errors, setErrors] = useState({})
 
@@ -30,7 +30,7 @@ export default function ProductDetails() {
           description: foundProduct.description,
           price: foundProduct.price,
           quantity: foundProduct.quantity,
-          image: foundProduct.image_url,
+          image_url: foundProduct.image_url,
         })
       } else {
         setTimeout(() => {
