@@ -10,7 +10,7 @@ A responsive webshop frontend built with **React.js** and **Tailwind CSS**, prov
 - **Styling**: Tailwind CSS
 - **State Management**: React Context API
 - **Routing**: React Router
-- **API Integration**: Axios + RESTful API
+- **API Integration**: RESTful API
 
 ---
 
