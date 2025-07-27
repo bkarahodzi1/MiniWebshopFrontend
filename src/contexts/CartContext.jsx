@@ -149,7 +149,7 @@ export const CartProvider = ({children}) => {
     setOrders(updatedOrders)
   }
 
-  //Get all orders
+  //Get all orders paginated and filtered
   const getOrders = async (page = 1, filters = {}) => {
   try {
     const params = new URLSearchParams();

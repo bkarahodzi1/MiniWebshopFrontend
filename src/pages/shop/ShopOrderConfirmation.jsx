@@ -63,6 +63,7 @@ export default function ShopOrderConfirmation() {
               Your order ID is: <span className="font-semibold">{order.id}</span>
             </p>
 
+            {/* Order details */}
             <div className="mt-8 border-t border-gray-200 pt-8">
               <h2 className="text-xl font-semibold text-gray-900">Order Summary</h2>
               <div className="mt-4 text-left">
@@ -88,6 +89,7 @@ export default function ShopOrderConfirmation() {
                 </dl>
               </div>
 
+              {/* Item details */}
               <div className="mt-8">
                 <h3 className="text-lg font-medium text-gray-900">Items Ordered</h3>
                 <ul role="list" className="mt-4 divide-y divide-gray-200 border-t border-b border-gray-200">

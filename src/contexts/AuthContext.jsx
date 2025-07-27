@@ -33,7 +33,7 @@ export const AuthProvider = ({children}) => {
     return false
   }
 
-  // Logout function
+  //Logout function
   const logout = () => {
     localStorage.removeItem("isAuthenticated")
     localStorage.removeItem("user")

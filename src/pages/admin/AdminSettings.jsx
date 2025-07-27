@@ -1,6 +1,8 @@
 import AdminLayout from "../../components/admin/AdminLayout"
 
 export default function AdminSettings() {
+
+  //Currently just hardcoded data
   return (
     <AdminLayout>
       <div className="px-4 py-6 sm:px-0">

@@ -47,6 +47,7 @@ export default function ShopCart() {
               <div className="lg:col-span-2 bg-white shadow sm:rounded-lg p-6">
                 <div className="flow-root">
                   <ul role="list" className="-my-6 divide-y divide-gray-200">
+                    {/* Item details */}
                     {cart.map((item) => (
                       <li key={item.product_id} className="flex py-6">
                         <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -107,6 +108,7 @@ export default function ShopCart() {
                 </div>
               </div>
 
+              {/* Cart details */}
               <div className="mt-8 lg:mt-0 lg:col-span-1 bg-white shadow sm:rounded-lg p-6">
                 <h2 className="text-lg font-medium text-gray-900">Order Summary</h2>
                 <div className="mt-4">

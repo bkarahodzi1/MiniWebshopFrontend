@@ -87,7 +87,7 @@ export default function ProductDetails() {
       return
     }
     updateProduct(id, formData)
-    setProduct({ ...product, ...formData }) // Update local product state
+    setProduct({ ...product, ...formData }) //Update local product state
     setIsEditing(false)
   }
 
@@ -110,6 +110,7 @@ export default function ProductDetails() {
 
   return (
     <AdminLayout>
+      {/* Admin's quick actions */}
       <div className="px-4 py-6 sm:px-0">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-semibold text-gray-900">Product Details</h1>
@@ -138,6 +139,7 @@ export default function ProductDetails() {
           </div>
         </div>
 
+        {/* Product details */}
         <div className="mt-6 bg-white shadow overflow-hidden sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6">
             <h3 className="text-lg leading-6 font-medium text-gray-900">Product Information</h3>

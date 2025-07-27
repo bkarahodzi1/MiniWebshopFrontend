@@ -22,7 +22,6 @@ export default function ProductList() {
     sort_by: sortOption || null,
   }
 
-
     const newProducts = await loadProductsFromBackend(pageNumber, filters)
     if (newProducts.data) {
       setCurrentPage(pageNumber)
@@ -285,6 +284,7 @@ export default function ProductList() {
                   </tbody>
                 </table>
               </div>
+                    {/* Next and previous page */}
                     {products.length > 0 ? (
                       <div className="flex justify-between mt-4 space-x-4">
                       <button

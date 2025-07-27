@@ -37,6 +37,7 @@ export default function OrderDetails() {
     }
   }
 
+  //Handle error
   if (!order) {
     return (
       <AdminLayout>
@@ -60,6 +61,7 @@ export default function OrderDetails() {
           </button>
         </div>
 
+        {/* Order details */}
         <div className="mt-6 bg-white shadow overflow-hidden sm:rounded-lg">
           <div className="px-4 py-5 sm:px-6">
             <h3 className="text-lg leading-6 font-medium text-gray-900">Order Information</h3>
@@ -74,7 +76,7 @@ export default function OrderDetails() {
               <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt className="text-sm font-medium text-gray-500">Order Date</dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {new Date(order.date).toLocaleString()}
+                  {new Date(order.created_at).toLocaleString()}
                 </dd>
               </div>
               <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -122,6 +124,7 @@ export default function OrderDetails() {
           </div>
         </div>
 
+        {/* Item details */}
         <div className="mt-8">
           <h2 className="text-lg font-medium text-gray-900">Order Items</h2>
           <div className="mt-4 flex flex-col">

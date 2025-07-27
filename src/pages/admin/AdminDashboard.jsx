@@ -7,6 +7,7 @@ export default function AdminDashboard() {
   const { getOrders } = useCart()
   const [ordersData, setOrdersData] = useState(null)
 
+  //Load data
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -28,6 +29,7 @@ export default function AdminDashboard() {
     )
   }
 
+  //Load data into variables
   const orders = ordersData.data
   const totalProducts = localStorage.getItem("totalItems")
   const totalOrders = ordersData.total_items

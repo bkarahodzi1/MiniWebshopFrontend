@@ -25,7 +25,7 @@ export default function ProductEntry() {
       [name]: name === "price" || name === "quantity" ? Number.parseFloat(value) || "" : value,
     })
 
-    // Clear error when field is edited
+    //Clear error when field is edited
     if (errors[name]) {
       setErrors({
         ...errors,

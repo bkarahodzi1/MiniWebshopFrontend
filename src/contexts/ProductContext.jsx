@@ -35,18 +35,19 @@ export const ProductProvider = ({children}) => {
   }
 
   useEffect(() => {
-  const loadInitialProducts = async () => {
-    const storedProducts = JSON.parse(localStorage.getItem("products"))
-    if (storedProducts) {
-      setProducts(storedProducts)
-    } else {
-      await loadProductsFromBackend(1)
+    //Load of initail products
+    const loadInitialProducts = async () => {
+      const storedProducts = JSON.parse(localStorage.getItem("products"))
+      if (storedProducts) {
+        setProducts(storedProducts)
+      } else {
+        await loadProductsFromBackend(1)
+      }
+      setLoading(false)
     }
-    setLoading(false)
-  }
 
-  loadInitialProducts()
-}, [])
+    loadInitialProducts()
+  }, [])
 
   //Add a new product
   const addProduct = async (product) => {
@@ -70,7 +71,7 @@ export const ProductProvider = ({children}) => {
     return newProduct
   }
 
-  // Update an existing product
+  //Update an existing product
   const updateProduct = async (id, updatedProduct) => {
     const updatedProducts = products.map((product) => (product.id === id ? { ...product, ...updatedProduct } : product))
     
@@ -86,7 +87,7 @@ export const ProductProvider = ({children}) => {
     loadProductsFromBackend(1)
   }
 
-  // Delete a product
+  //Delete a product
   const deleteProduct = async (id) => {
     await fetch(`${baseUrl}/products/${id}`,{
       method: "DELETE",
@@ -97,14 +98,13 @@ export const ProductProvider = ({children}) => {
     loadProductsFromBackend(1)
   }
 
-  // Get a single product by ID
+  //Get a single product by ID
   const getProduct = async(id) => {
     const res = await fetch(`${baseUrl}/products/${id}`)
     if (!res.ok) throw new Error("Product not found")
     return await res.json()
   }
 
-  //Pass into context provider so useProducts() users can access it
   const value = {
     products,
     loading,

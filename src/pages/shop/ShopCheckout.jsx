@@ -71,6 +71,7 @@ export default function ShopCheckout() {
         <div className="px-4 py-6 sm:px-0">
           <h1 className="text-3xl font-extrabold text-gray-900 mb-6">Checkout</h1>
 
+          {/* Customer info */}
           <div className="lg:grid lg:grid-cols-3 lg:gap-8">
             <div className="lg:col-span-2 bg-white shadow sm:rounded-lg p-6">
               <h2 className="text-lg font-medium text-gray-900 mb-4">Customer Information</h2>
@@ -184,15 +185,16 @@ export default function ShopCheckout() {
               </form>
             </div>
 
+            {/* Order summary */}
             <div className="mt-8 lg:mt-0 lg:col-span-1 bg-white shadow sm:rounded-lg p-6">
               <h2 className="text-lg font-medium text-gray-900">Order Summary</h2>
               <div className="mt-4">
                 <ul role="list" className="divide-y divide-gray-200">
                   {cart.map((item) => (
-                    <li key={item.productId} className="py-4 flex justify-between items-center">
+                    <li key={item.product_id} className="py-4 flex justify-between items-center">
                       <div className="flex items-center">
                         <img
-                          src={item.image_url || "/placeholder.svg?height=50&width=50"}
+                          src={item.image || "/placeholder.svg?height=50&width=50"}
                           alt={item.name}
                           className="h-10 w-10 rounded-md object-cover mr-4"
                         />
