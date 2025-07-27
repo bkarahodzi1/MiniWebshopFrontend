@@ -95,7 +95,7 @@ export default function ShopOrderConfirmation() {
                     <li key={item.product_id} className="py-4 flex justify-between items-center">
                       <div className="flex items-center">
                         <img
-                          src={item.image_url || "/placeholder.svg?height=50&width=50"}
+                          src={item.image || "/placeholder.svg?height=50&width=50"}
                           alt={item.name}
                           className="h-12 w-12 rounded-md object-cover mr-4"
                         />
