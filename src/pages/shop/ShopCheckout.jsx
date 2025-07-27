@@ -2,10 +2,12 @@ import {useState} from "react"
 import {useNavigate} from "react-router-dom"
 import ShopLayout from "../../components/shop/ShopLayout"
 import {useCart} from "../../contexts/CartContext"
+import { useAuth } from "../../contexts/AuthContext"
 
 export default function ShopCheckout() {
   const {cart, getTotalPrice, createOrder} = useCart()
   const navigate = useNavigate()
+  const { sendEmail } = useAuth()
 
   const [customerInfo, setCustomerInfo] = useState({
     name: "",
@@ -62,6 +64,7 @@ export default function ShopCheckout() {
     }
 
     const newOrder = await createOrder(customerInfo)
+    sendEmail()
     navigate(`/order-confirmation/${newOrder.id}`)
   }
 

@@ -3,6 +3,7 @@ import {createContext, useState, useContext, useEffect} from "react"
 const AuthContext = createContext()
 
 export const useAuth = () => useContext(AuthContext)
+const baseUrl = import.meta.env.VITE_API_URL
 
 export const AuthProvider = ({children}) => {
   const [currentUser, setCurrentUser] = useState(null)
@@ -40,11 +41,22 @@ export const AuthProvider = ({children}) => {
     setCurrentUser(null)
   }
 
+  //Send user the email
+  const sendEmail = () => {
+    fetch(`${baseUrl}/send-email`,{
+      method: "POST",
+       headers: {
+        "Content-Type": "application/json",
+      }
+    })
+  }
+
   //Pass into context provider so useAuth() users can access it
   const value = {
     currentUser,
     login,
     logout,
+    sendEmail,
     loading,
   }
 
