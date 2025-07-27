@@ -1,30 +1,64 @@
-# React + TypeScript + Vite
+# 🛍️ Mini Webshop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully responsive mini webshop application built with **React.js** and **FastAPI**, featuring an admin dashboard for managing products and orders, and a guest interface for browsing and placing orders.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tech Stack
 
-## Expanding the ESLint configuration
+- **Frontend**: React.js + Tailwind CSS
+- **Backend**: FastAPI (Python)
+- **Styling**: Tailwind CSS
+- **Deployment**: Free hosting platforms (e.g., Vercel, Render)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## 🧑‍💻 Users
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+- **Admin**: Can log in, manage products, and view/manage orders
+- **Guest (Customer)**: Can browse products and place orders
+
+---
+
+## ✨ Features
+
+### 🛒 Webshop (Guest)
+
+- View all available products
+- Filter by name, price, and quantity
+- Sort products by publish date
+- View product details
+- Add products to cart
+- Update and remove items in cart
+- Submit an order with customer information
+
+### 🛠️ Admin Dashboard
+
+- Login with username and password
+- Navigation menu: Home, Settings, Logout
+- Product list with filter and sort
+- Add new products (name, image, description, quantity, price)
+- Edit and delete existing products
+- View order list with pagination and sorting
+- View order details and update status (Accepted, Rejected, Completed)
+
+---
+
+## 📱 Responsive Design
+
+The application is fully responsive and works seamlessly on:
+
+- 📱 Mobile
+- 💻 Desktop
+- 📱 Tablets
+
+---
+
+## 🔧 Getting Started (Frontend)
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/webshopfrontend.git
+cd webshopfrontend
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
