@@ -25,6 +25,7 @@ A responsive webshop frontend built with **React.js** and **Tailwind CSS**, prov
 
 ### 🛠️ Admin Dashboard
 
+- **Access**: Access the page by adding */admin* to the route
 - **Login Page**: Authenticate with username and password
 - **Dashboard Navigation**: Home, Settings, Logout
 - **Product List**: Filter, sort, and view all products
@@ -102,7 +103,7 @@ webshopfrontend/
 
 ## 🔗 Live Demo
 
-- Frontend: [https://your-frontend-url.com](https://your-frontend-url.com)
+- Frontend: [https://mini-webshop-frontend.vercel.app](https://mini-webshop-frontend.vercel.app)
 
 ---
 
