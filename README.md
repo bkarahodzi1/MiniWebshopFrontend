@@ -1,60 +1,51 @@
-# 🛍️ Mini Webshop
+# 🛍️ Mini Webshop Frontend
 
-A fully responsive mini webshop application built with **React.js** and **FastAPI**, featuring an admin dashboard for managing products and orders, and a guest interface for browsing and placing orders.
+A responsive webshop frontend built with **React.js** and **Tailwind CSS**, providing a clean shopping experience for customers and a dashboard for admins to manage products and orders.
 
 ---
 
-## 🚀 Tech Stack
+## ⚙️ Tech Stack
 
-- **Frontend**: React.js + Tailwind CSS
-- **Backend**: FastAPI (Python)
+- **Framework**: React.js (Vite)
 - **Styling**: Tailwind CSS
-- **Deployment**: Free hosting platforms (e.g., Vercel, Render)
-
----
-
-## 🧑‍💻 Users
-
-- **Admin**: Can log in, manage products, and view/manage orders
-- **Guest (Customer)**: Can browse products and place orders
+- **State Management**: React Context API
+- **Routing**: React Router
+- **API Integration**: Axios + RESTful API
 
 ---
 
 ## ✨ Features
 
-### 🛒 Webshop (Guest)
+### 🛒 Guest (Customer) Interface
 
-- View all available products
-- Filter by name, price, and quantity
-- Sort products by publish date
-- View product details
-- Add products to cart
-- Update and remove items in cart
-- Submit an order with customer information
+- **Home Page**: View all available products with filtering and sorting options
+- **Product Details Page**: See product image, description, quantity, price
+- **Cart Page**: Add, update, and remove items from cart
+- **Order Page**: Enter customer details and confirm order
 
 ### 🛠️ Admin Dashboard
 
-- Login with username and password
-- Navigation menu: Home, Settings, Logout
-- Product list with filter and sort
-- Add new products (name, image, description, quantity, price)
-- Edit and delete existing products
-- View order list with pagination and sorting
-- View order details and update status (Accepted, Rejected, Completed)
+- **Login Page**: Authenticate with username and password
+- **Dashboard Navigation**: Home, Settings, Logout
+- **Product List**: Filter, sort, and view all products
+- **Add Product**: Submit name, description, image URL, quantity, price
+- **Edit/Delete Product**: Update or remove existing products
+- **Orders Page**: View all orders with pagination and sort by date
+- **Order Details**: View and update order status (Accepted, Rejected, Completed)
 
 ---
 
-## 📱 Responsive Design
+## 📱 Responsiveness
 
-The application is fully responsive and works seamlessly on:
+The application is fully responsive and works smoothly on:
 
-- 📱 Mobile
-- 💻 Desktop
-- 📱 Tablets
+- ✅ Mobile devices
+- ✅ Tablets
+- ✅ Desktop computers
 
 ---
 
-## 🔧 Getting Started (Frontend)
+## 🚀 Getting Started
 
 ### 1. Clone the Repository
 
@@ -62,3 +53,59 @@ The application is fully responsive and works seamlessly on:
 git clone https://github.com/your-username/webshopfrontend.git
 cd webshopfrontend
 ```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Set Environment Variables
+
+Create a `.env` file in the root of the project:
+
+```env
+VITE_API_URL=https://miniwebshopapi.onrender.com
+# or for local development:
+# VITE_API_URL=http://localhost:8000
+```
+
+### 4. Start the Development Server
+
+```bash
+npm run dev
+```
+
+The app will be running on [http://localhost:5173](http://localhost:5173) by default.
+
+---
+
+## 🧪 Folder Structure
+
+```
+webshopfrontend/
+├── public/
+├── src/
+│   ├── components/
+│   ├── contexts/
+│   ├── pages/
+│   ├── routes/
+│   ├── styles/
+│   ├── App.jsx
+│   └── main.jsx
+├── .env
+├── package.json
+└── tailwind.config.js
+```
+
+---
+
+## 🔗 Live Demo
+
+- Frontend: [https://your-frontend-url.com](https://your-frontend-url.com)
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
