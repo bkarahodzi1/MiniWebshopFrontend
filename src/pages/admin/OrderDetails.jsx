@@ -2,13 +2,11 @@ import {useState, useEffect} from "react"
 import {useParams, useNavigate} from "react-router-dom"
 import AdminLayout from "../../components/admin/AdminLayout"
 import {useCart} from "../../contexts/CartContext"
-import {useProducts} from "../../contexts/ProductContext"
 
 export default function OrderDetails() {
   const {id} = useParams()
   const navigate = useNavigate()
   const {getOrder, updateOrderStatus} = useCart()
-  const {getProduct} = useProducts()
 
   const [order, setOrder] = useState(null)
   const [selectedStatus, setSelectedStatus] = useState("")
@@ -161,7 +159,6 @@ export default function OrderDetails() {
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                       {order.items.map((item) => {
-                        const productDetails = getProduct(item.product_id)
                         return (
                           <tr key={item.product_id}>
                             <td className="px-6 py-4 whitespace-nowrap">
@@ -169,7 +166,7 @@ export default function OrderDetails() {
                                 <div className="flex-shrink-0 h-10 w-10">
                                   <img
                                     className="h-10 w-10 rounded-full object-cover"
-                                    src={productDetails?.image_url || "/placeholder.svg"}
+                                    src={item?.image || "/placeholder.svg"}
                                     alt={item.name}
                                   />
                                 </div>
